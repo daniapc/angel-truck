@@ -1,5 +1,9 @@
 *.mp4
 *.avi
+*.png
+*.txt
+
+!demonstracao/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

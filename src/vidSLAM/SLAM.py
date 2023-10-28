@@ -11,7 +11,6 @@ prevY = 0
 prevZ = 0
 prev_Pk = 0.05
 
-
 class Slam:
     def __init__(self, fov):
         self.kp1 = []
