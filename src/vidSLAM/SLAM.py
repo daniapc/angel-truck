@@ -114,7 +114,7 @@ class Slam:
         ax.scatter(self.cam_xyz[:, [0]], self.cam_xyz[:, [1]], c='r')
         ax.scatter(self.cam_xyz[1, [0]], self.cam_xyz[1, [1]], c='y')
 
-        plt.savefig("caminho2d.png")
+        # plt.savefig("caminho2d.png")
 
         # lmx = 
         np.savetxt("lm_x.txt", list(self.lm_xyz[:, [0], [0], [0]]))
