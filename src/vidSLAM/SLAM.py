@@ -116,12 +116,11 @@ class Slam:
 
         # plt.savefig("caminho2d.png")
 
-        # lmx = 
         np.savetxt("lm_x.txt", list(self.lm_xyz[:, [0], [0], [0]]))
         np.savetxt("lm_y.txt", list(self.lm_xyz[:, [1], [0], [0]]))
-        # np.savetxt("lm_y.txt", self.lm_xyz[:, [1]])
-        # np.savetxt("cam_x.txt", self.cam_xyz[:, [0]])
-        # np.savetxt("cam_y.txt", self.cam_xyz[:, [1]])
+
+        np.savetxt("cam_x.txt", list(self.cam_xyz[:, [0], [0]]))
+        np.savetxt("cam_y.txt", list(self.cam_xyz[:, [1], [0]]))
 
         # ax = fig.add_subplot(projection='3d')
 
