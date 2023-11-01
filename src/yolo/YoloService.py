@@ -9,12 +9,12 @@ class Yolo:
         self.video_name = video_name
         self.path = path
 
-    def execute_yolo(self, image, index):
+    def execute_yolo(self, file_name):
 
-        str_index = str(index)
-        file_name = self.video_name.replace('.mp4', str_index + '.jpg')
+        # str_index = str(index)
+        # file_name = self.video_name.replace('.mp4', str_index + '.jpg')
         
-        cv2.imwrite(self.path + '/src/yolo/darknet/data/' + file_name, image) 
+        # cv2.imwrite(self.path + '/src/yolo/darknet/data/' + file_name, image) 
 
         try:
             output = subprocess.run(
@@ -44,5 +44,10 @@ class Yolo:
         str_index = str(index)
         file_name = self.video_name.replace('.mp4', str_index + 'pred.jpg')
 
-        os.remove(self.path + '/src/yolo/darknet/'+file_name) 
-        os.remove(self.path + '/src/yolo/darknet/data/'+file_name.replace('pred', '')) 
+        src_file = self.path + '/src/yolo/darknet/data/'+file_name.replace('pred', '')
+        pred_file = self.path + '/src/yolo/darknet/'+file_name
+
+        if os.path.isfile(src_file):
+            os.remove(src_file) 
+        if os.path.isfile(pred_file):
+            os.remove(pred_file) 

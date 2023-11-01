@@ -15,6 +15,8 @@ def video_analisys():
 
     angel_truck = AngelTruck("video.mp4", 60)
     angel_truck.video_analisys()
+    angel_truck.delete_yolo_files()
+    # angel_truck.yolo_analysis()
     angel_truck.draw_map(800, 600, 7)
 
     return "Process finished successfuly."
