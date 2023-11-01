@@ -11,7 +11,7 @@ class AngelTruck:
     def __init__(self, video, fov):
             self.video = video
             self.fov = fov
-            self.images = []
+            # self.images = []
             self.image_dict = {}
             self.objects_dict = {}
 
@@ -26,7 +26,7 @@ class AngelTruck:
         slam = Slam(fov)
         yolo_path = os.getcwd()
 
-        images = []
+        # images = []
         image_dict = {}
         objects_dict = {}
 
@@ -75,7 +75,7 @@ class AngelTruck:
 
         slam.buildMap()
 
-        self.images = images
+        # self.images = images
         self.image_dict = image_dict
         self.objects_dict = objects_dict
 

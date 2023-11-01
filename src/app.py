@@ -14,8 +14,10 @@ def video_analisys():
     file.save("data/video.mp4")
 
     angel_truck = AngelTruck("video.mp4", 60)
+    print("Iniciando detecao SLAM")
     angel_truck.video_analisys()
     # angel_truck.delete_yolo_files()
+    print("Iniciando detecao Yolo")
     angel_truck.yolo_analysis()
     angel_truck.draw_map(800, 600, 7)
 
@@ -33,6 +35,7 @@ def get_map():
 
     return file
 
+@DeprecationWarning
 @app.route("/getvideo", methods=['GET'])
 def get_video():
     file = open("output.avi","rb")
