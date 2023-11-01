@@ -79,6 +79,8 @@ class Pillow:
         f = open(path, "r")
 
         yolo_dict_str = f.read()
+        if '{}' in yolo_dict_str:
+            return {}
         yolo_dict_str = yolo_dict_str[1:]
         yolo_dict_str = yolo_dict_str[:-3]
         yolo_dict_str = yolo_dict_str.replace('[', '').replace(' ', '').replace('\'','')
