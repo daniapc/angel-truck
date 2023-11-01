@@ -63,15 +63,15 @@ class AngelTruck:
                         continue
 
         # Press Q on keyboard to exit
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
+                # if cv2.waitKey(1) & 0xFF == ord('q'):
+                #     break
 
         # Break the loop
             else:
                 break
 
         cap.release()
-        cv2.destroyAllWindows()
+        # cv2.destroyAllWindows()
 
         slam.buildMap()
 

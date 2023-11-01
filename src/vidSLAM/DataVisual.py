@@ -19,7 +19,7 @@ class DataVisual:
         img2 = cv2.drawKeypoints(frame, kp, None, color=(255, 0, 0), flags=0)
 
         #Display results on screen
-        cv2.imshow('vidSLAM', img2)
+        # cv2.imshow('vidSLAM', img2)
 
         return img2
 
