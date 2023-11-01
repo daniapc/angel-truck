@@ -41,7 +41,7 @@ class AngelTruck:
                 frame = cv2.resize(frame, (800, 600))
 
                 image = DataVisual.featureExtraction(frame)
-                images.append(image)
+                # images.append(image)
 
                 if count >= 10:
                     count = 0
@@ -55,7 +55,7 @@ class AngelTruck:
                         cv2.imwrite(yolo_path + '/src/yolo/darknet/data/' + file_name, frame)
 
                         image_dict[index_lm_xyz] = file_name
-                        objects_dict[index_lm_xyz] = len(images)
+                        # objects_dict[index_lm_xyz] = len(images)
 
         # se houver detecção de objetos, é adicionado o frame que fez a detecção
 
@@ -82,9 +82,9 @@ class AngelTruck:
     def yolo_analysis(self):
 
         video_name = self.video
-        images = self.images
+        # images = self.images
         image_dict = self.image_dict
-        objects_dict = self.objects_dict
+        # objects_dict = self.objects_dict
 
         yolo = Yolo(video_name, os.getcwd())
         yolo_dict = {}
@@ -98,24 +98,24 @@ class AngelTruck:
             if len(yolo_out) > 0:
                 yolo_dict[image_key] = yolo_out
 
-                yolo_image = yolo.export_frame(image_key)
-                insert_index = objects_dict[image_key]
+                # yolo_image = yolo.export_frame(image_key)
+                # insert_index = objects_dict[image_key]
 
-                for iterator in range(30):
-                    images.insert(insert_index + i*30, yolo_image)
+                # for iterator in range(30):
+                #     images.insert(insert_index + i*30, yolo_image)
                 
-                i = i + 1
+                # i = i + 1
 
             yolo.remove_file(image_key)
 
-        out_video_name = 'output.avi'
-        height, width, layers = images[0].shape
+        # out_video_name = 'output.avi'
+        # height, width, layers = images[0].shape
 
-        video = cv2.VideoWriter(out_video_name, 0, 60, frameSize=(width,height))
+        # video = cv2.VideoWriter(out_video_name, 0, 60, frameSize=(width,height))
         
-        for image in images:
-            video.write(image)
-        video.release()
+        # for image in images:
+        #     video.write(image)
+        # video.release()
 
         with open('yolo_dict.txt', 'w') as f:
             print(yolo_dict, file=f)
