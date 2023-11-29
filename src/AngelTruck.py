@@ -5,6 +5,8 @@ import cv2
 import os
 import base64
 
+import time
+
 from Pillow import Pillow
 
 class AngelTruck:
@@ -30,9 +32,16 @@ class AngelTruck:
         image_dict = {}
         objects_dict = {}
 
+        frame_len = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        frame_count = 0
+
         # Read until video is completed
         while(cap.isOpened()):
         # Capture frame-by-frame
+            frame_count += 1
+            percentage = str(round(100*frame_count/frame_len, 2))+"%"
+            self.update_progress("Processamento vidSLAM (1/2) - "+percentage)
+
             ret, frame = cap.read()
             if ret == True:
 
@@ -50,7 +59,7 @@ class AngelTruck:
                         index_lm_xyz = len(lm_xyz)
                         str_index = str(index_lm_xyz)
 
-                        file_name = video_name.replace('.mp4', str_index + '.jpg')
+                        file_name = video_name.replace('.avi', str_index + '.jpg')
                         
                         cv2.imwrite(yolo_path + '/src/yolo/darknet/data/' + file_name, frame)
 
@@ -84,6 +93,7 @@ class AngelTruck:
         video_name = self.video
         # images = self.images
         image_dict = self.image_dict
+        dict_len = len(image_dict)
         # objects_dict = self.objects_dict
 
         yolo = Yolo(video_name, os.getcwd())
@@ -104,8 +114,10 @@ class AngelTruck:
                 # for iterator in range(30):
                 #     images.insert(insert_index + i*30, yolo_image)
                 
-                # i = i + 1
-
+                
+            i = i + 1
+            percentage = str(round(100*i/dict_len, 2))+"%"
+            self.update_progress("Processamento YOLO (2/2) - "+percentage)
             yolo.remove_file(image_key)
 
         # out_video_name = 'output.avi'
@@ -138,3 +150,38 @@ class AngelTruck:
         encoder.close()
 
         return encoded
+    
+    def save_frame(file, number):
+        string_number = str(100000 + int(number))[1:]
+
+        file.save("data/frames/frame"+string_number+".jpg")
+
+    def stop_recording():
+
+        path = "data/frames/"
+
+        lst = os.listdir("data/frames/")
+
+        lst.sort()
+
+        out_video_name = "data/" + "input.avi"
+
+        image = cv2.imread(path + lst[0])
+        height, width, layers = image.shape
+
+        video = cv2.VideoWriter(filename=out_video_name, fourcc= 0, fps=24, frameSize=(width,height))
+
+        for file in lst:
+            file_path = path + file
+            image = cv2.imread(file_path)
+            video.write(image)
+
+            print(file)
+
+            os.remove(file_path)
+
+        video.release()
+
+    def update_progress(self, message):
+        f = open("progress.txt", "w")
+        f.write(message)
