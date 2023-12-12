@@ -60,6 +60,7 @@ class AngelTruck:
                         str_index = str(index_lm_xyz)
 
                         file_name = video_name.replace('.avi', str_index + '.jpg')
+                        file_name = video_name.replace('.mp4', str_index + '.jpg')
                         
                         cv2.imwrite(yolo_path + '/src/yolo/darknet/data/' + file_name, frame)
 
