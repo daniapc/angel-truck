@@ -9,12 +9,14 @@ def home():
 
 @app.route("/videoanalisys",methods=["GET", "POST", "PUT"])
 def video_analisys():
-    # file = request.files['file']
 
-    # file.save("data/video.mp4")
-
-    # angel_truck = AngelTruck("video.mp4", 60)
-    angel_truck = AngelTruck("input.avi", 60)
+    if 'file' in request.files:
+        file = request.files['file']
+        file.save("data/video.mp4")
+        angel_truck = AngelTruck("video.mp4", 60)
+    else:
+        angel_truck = AngelTruck("input.avi", 60)
+        
     print("Iniciando deteccao SLAM")
     angel_truck.video_analisys()
     print("Iniciando deteccao Yolo")
